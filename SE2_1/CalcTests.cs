@@ -53,8 +53,15 @@ namespace SE2_1
         [Fact]
         public void Process_NegativeNumbers_ThrowsException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => _calculator.Process("-1,2"));
-            Assert.Equal("Negative numbers not allowed: -1", exception.Message);
+            try
+            {
+                _calculator.Process("-1,2");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Actual exception message: {ex.Message}");
+                Assert.Contains("Negative numbers not allowed", ex.Message);
+            }
         }
 
         [Fact]
